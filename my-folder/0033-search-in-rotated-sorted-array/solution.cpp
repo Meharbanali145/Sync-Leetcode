@@ -1,26 +1,25 @@
 class Solution {
 public:
-    int search(vector<int>& nums, int target) {
-        int n = nums.size();
-        int st = 0;
-        int end  = n-1;
-        while( st <= end){
-            int mid = st + (end - st)/2;
-            if(nums[mid] == target){
+    int search(vector<int>& nums, int tar) {
+        int s = 0;
+        int e = nums.size()-1;
+        while(s <= e){
+            int mid = s+(e-s)/2;
+            if(nums[mid] == tar ){
                 return mid;
             }
-            if(nums[st] <= nums[mid]){ // mean left sorted
-                if(nums[st] <= target && target <= nums[mid]){ // left search
-                    end = mid-1;
+
+            if(nums[s] <= nums[mid]){
+                if(nums[s] <= tar && tar <= nums[mid]){
+                    e = mid-1;
                 }else{
-                    st = mid+1;
+                    s = mid+1;
                 }
-            }
-            else{ // mean right sorted
-                if(nums[mid] <= target && target <= nums[end]){ //right search
-                    st = mid + 1;
+            }else{
+                if(nums[mid] <= tar && tar <= nums[e]){
+                    s = mid+1;
                 }else{
-                    end = mid - 1;
+                    e = mid-1;
                 }
             }
         }
