@@ -1,20 +1,20 @@
 class Solution {
 public:
     int peakIndexInMountainArray(vector<int>& arr) {
-        int n = arr.size();
-        int st = 1; //0th position and last position can never be a peak position in mountain aray
-        int end = n-2;
-        while(st <= end){
-            int mid = st + (end - st )/2;
-            if(arr[mid-1] < arr[mid] && arr[mid] > arr[mid+1]){
-			    return mid;
-            }
-            if(arr[mid-1] < arr[mid]){
-                st = mid+1;
-            }else{
-                end = mid-1;
+        int s = 0;
+        int e = arr.size() - 1;
+
+        while(s < e){
+            int mid = s + (e - s) / 2;
+
+            if(arr[mid] < arr[mid + 1]){
+                // We're on the uphill, peak is to the right
+                s = mid + 1;
+            } else {
+                // We're on downhill or at peak, peak is at mid or left
+                e = mid;
             }
         }
-        return -1;
+        return s; // s == e == peak index
     }
 };
